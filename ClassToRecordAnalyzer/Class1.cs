@@ -1,6 +1,4 @@
-﻿using System.Runtime;
-
-namespace ClassToRecordAnalyzer;
+﻿namespace ClassToRecordAnalyzer;
 
 public class Person
 {

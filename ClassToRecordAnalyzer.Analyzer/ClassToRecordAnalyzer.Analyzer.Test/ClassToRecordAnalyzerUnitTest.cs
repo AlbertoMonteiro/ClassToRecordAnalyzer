@@ -71,7 +71,7 @@ namespace ConsoleApplication1
     public record Person(string Name);
 }";
 
-            var expected = VerifyCS.Diagnostic("ClassToRecordAnalyzer")
+            var expected = VerifyCS.Diagnostic("CRA0001")
                 .WithSpan(5, 18, 5, 24)
                 .WithMessage("Type name 'Person' can be a record.");
             await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
@@ -98,7 +98,7 @@ namespace ConsoleApplication1
     public record Person(string Name, int Age);
 }";
 
-            var expected = VerifyCS.Diagnostic("ClassToRecordAnalyzer")
+            var expected = VerifyCS.Diagnostic("CRA0001")
                 .WithSpan(5, 18, 5, 24)
                 .WithMessage("Type name 'Person' can be a record.");
             await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);

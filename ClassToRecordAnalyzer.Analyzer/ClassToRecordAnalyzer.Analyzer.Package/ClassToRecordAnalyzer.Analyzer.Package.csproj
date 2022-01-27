@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -8,23 +8,30 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>ClassToRecordAnalyzer.Analyzer</PackageId>
-    <PackageVersion>1.0.0.0</PackageVersion>
-    <Authors>alber</Authors>
-    <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
-    <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
-    <PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>
-    <RepositoryUrl>http://REPOSITORY_URL_HERE_OR_DELETE_THIS_LINE</RepositoryUrl>
+    <PackageId>ClassToRecord.Analyzer</PackageId>
+    <PackageVersion>1.0.1</PackageVersion>
+    <Authors>Alberto Monteiro</Authors>
+    <RepositoryUrl>https://github.com/AlbertoMonteiro/ClassToRecordAnalyzer</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>ClassToRecordAnalyzer.Analyzer</Description>
-    <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
+    <Description>Simple analyzer that helps to convert a simple class to a record, when you use Visual Studio`s feature to "Paste special as JSON" to create the class from the JSON in your clipboard it creates a class, when that analyzer will help to convert this class to a record.</Description>
+    <PackageReleaseNotes>First version</PackageReleaseNotes>
     <Copyright>Copyright</Copyright>
-    <PackageTags>ClassToRecordAnalyzer.Analyzer, analyzers</PackageTags>
+    <PackageTags>ClassToRecord.Analyzer, analyzers, record</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
     <NoPackageAnalysis>true</NoPackageAnalysis>
-
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <EnableNETAnalyzers>True</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\readme.md" Link="readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ClassToRecordAnalyzer.Analyzer\ClassToRecordAnalyzer.Analyzer.csproj" />

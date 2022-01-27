@@ -10,14 +10,14 @@ namespace ClassToRecordAnalyzer.Analyzer
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class ClassToRecordAnalyzer : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "ClassToRecordAnalyzer";
+        public const string DiagnosticId = "CRA0001";
 
         // You can change these strings in the Resources.resx file. If you do not want your analyzer to be localize-able, you can use regular strings for Title and MessageFormat.
         // See https://github.com/dotnet/roslyn/blob/main/docs/analyzers/Localizing%20Analyzers.md for more on localization
         private static readonly LocalizableString Title = new LocalizableResourceString(nameof(Resources.AnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(Resources.AnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString Description = new LocalizableResourceString(nameof(Resources.AnalyzerDescription), Resources.ResourceManager, typeof(Resources));
-        private const string Category = "Naming";
+        private const string Category = "Enhancement";
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: Description);
 
@@ -33,17 +33,8 @@ namespace ClassToRecordAnalyzer.Analyzer
 
         private void Analyze(SyntaxNodeAnalysisContext context)
         {
-            if (context.Node is ClassDeclarationSyntax classDeclaration)
-            {
-                var assign = classDeclaration.AncestorsAndSelf().OfType<AssignmentExpressionSyntax>().FirstOrDefault();
-                var containsOnlyPublicProperties = classDeclaration.Members.All(m => m.IsKind(SyntaxKind.PropertyDeclaration) && m.Modifiers.All(x => x.IsKind(SyntaxKind.PublicKeyword)));
-
-                if (containsOnlyPublicProperties)
-                {
-                    context.ReportDiagnostic(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier.ValueText));
-                }
-
-            }
+            if (context.Node is ClassDeclarationSyntax classDeclaration && classDeclaration.Members.All(m => m.IsKind(SyntaxKind.PropertyDeclaration) && m.Modifiers.All(x => x.IsKind(SyntaxKind.PublicKeyword))))
+                context.ReportDiagnostic(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier.ValueText));
         }
     }
 }
