@@ -40,7 +40,7 @@ namespace ClassToRecordAnalyzer.Analyzer
 
                 if (containsOnlyPublicProperties)
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation()));
+                    context.ReportDiagnostic(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(), classDeclaration.Identifier.ValueText));
                 }
 
             }
