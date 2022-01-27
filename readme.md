@@ -8,10 +8,10 @@ An class must meet following requirements to trigger analyzer:
 
 ## Diagnostic reported
 
-![Diagnostic reported](./docs/report.png)
+![Diagnostic reported](https://raw.githubusercontent.com/AlbertoMonteiro/ClassToRecordAnalyzer/master/docs/report.png)
 
 ## Code Fix
-![Code Fix](./docs/codefix.png)
+![Code Fix](https://raw.githubusercontent.com/AlbertoMonteiro/ClassToRecordAnalyzer/master/docs/codefix.png)
 
 # Resources
 
