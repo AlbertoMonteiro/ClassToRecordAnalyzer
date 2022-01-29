@@ -26,4 +26,6 @@ jobs:
     - name: Pack
       run: dotnet build ./ClassToRecordAnalyzer.Analyzer/ClassToRecordAnalyzer.Analyzer.Package/ClassToRecordAnalyzer.Analyzer.Package.csproj -c Release -o nuget
     - name: Publish
-      run: dotnet nuget push file ./nuget/*.nupkg -k ${{ secrets.NUGET_KEY }}
+      run: |
+        cd nuget
+        dotnet nuget push *.nupkg -k ${{ secrets.NUGET_KEY }}
