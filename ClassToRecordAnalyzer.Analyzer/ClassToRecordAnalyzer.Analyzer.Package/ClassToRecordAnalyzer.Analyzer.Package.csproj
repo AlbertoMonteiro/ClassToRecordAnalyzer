@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <PackageId>ClassToRecord.Analyzer</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
     <Authors>Alberto Monteiro</Authors>
     <RepositoryUrl>https://github.com/AlbertoMonteiro/ClassToRecordAnalyzer</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
