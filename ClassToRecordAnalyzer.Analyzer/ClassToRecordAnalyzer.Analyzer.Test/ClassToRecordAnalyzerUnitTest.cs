@@ -4,23 +4,23 @@ using VerifyCS = ClassToRecordAnalyzer.Analyzer.Test.CSharpCodeFixVerifier<
     ClassToRecordAnalyzer.Analyzer.ClassToRecordAnalyzer,
     ClassToRecordAnalyzer.Analyzer.ClassToRecordAnalyzerCodeFixProvider>;
 
-namespace ClassToRecordAnalyzer.Analyzer.Test
-{
-    [TestClass]
-    public class ClassToRecordAnalyzerUnitTest
-    {
-        [TestMethod]
-        public async Task DoesNothingWhenCodeIsBlanck()
-        {
-            var test = @"";
+namespace ClassToRecordAnalyzer.Analyzer.Test;
 
-            await VerifyCS.VerifyAnalyzerAsync(test);
-        }
-        
-        [TestMethod]
-        public async Task DoesNothingIfAtLeastOnePropertyIsNotPublic()
-        {
-            var test = @"using System;
+[TestClass]
+public class ClassToRecordAnalyzerUnitTest
+{
+    [TestMethod]
+    public async Task DoesNothingWhenCodeIsBlanck()
+    {
+        var test = @"";
+
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
+
+    [TestMethod]
+    public async Task DoesNothingIfAtLeastOnePropertyIsNotPublic()
+    {
+        var test = @"using System;
 
 namespace ConsoleApplication1
 {
@@ -31,13 +31,13 @@ namespace ConsoleApplication1
     }
 }";
 
-            await VerifyCS.VerifyAnalyzerAsync(test);
-        }
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
 
-        [TestMethod]
-        public async Task DoesNothingIfAtLeastOneMethod()
-        {
-            var test = @"using System;
+    [TestMethod]
+    public async Task DoesNothingIfAtLeastOneMethod()
+    {
+        var test = @"using System;
 
 namespace ConsoleApplication1
 {
@@ -48,13 +48,13 @@ namespace ConsoleApplication1
     }
 }";
 
-            await VerifyCS.VerifyAnalyzerAsync(test);
-        }
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
 
-        [TestMethod]
-        public async Task CreateRecordWhenDoesHaveOnlyOneProperty()
-        {
-            var test = @"using System;
+    [TestMethod]
+    public async Task CreateRecordWhenDoesHaveOnlyOneProperty()
+    {
+        var test = @"using System;
 
 namespace ConsoleApplication1
 {
@@ -64,23 +64,23 @@ namespace ConsoleApplication1
     }
 }";
 
-            var fixtest = @"using System;
+        var fixtest = @"using System;
 
 namespace ConsoleApplication1
 {
     public record Person(string Name);
-}";
+}".ReplaceLineEndings();
 
-            var expected = VerifyCS.Diagnostic("CRA0001")
-                .WithSpan(5, 18, 5, 24)
-                .WithMessage("Type name 'Person' can be a record.");
-            await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
-        }
-        
-        [TestMethod]
-        public async Task CreateRecordWhenDoesHaveTwoOrMoreProperties()
-        {
-            var test = @"using System;
+        var expected = VerifyCS.Diagnostic("CRA0001")
+            .WithSpan(5, 18, 5, 24)
+            .WithMessage("Type name 'Person' can be a record.");
+        await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
+    }
+
+    [TestMethod]
+    public async Task CreateRecordWhenDoesHaveTwoOrMoreProperties()
+    {
+        var test = @"using System;
 
 namespace ConsoleApplication1
 {
@@ -91,17 +91,16 @@ namespace ConsoleApplication1
     }
 }";
 
-            var fixtest = @"using System;
+        var fixtest = @"using System;
 
 namespace ConsoleApplication1
 {
     public record Person(string Name, int Age);
-}";
+}".ReplaceLineEndings();
 
-            var expected = VerifyCS.Diagnostic("CRA0001")
-                .WithSpan(5, 18, 5, 24)
-                .WithMessage("Type name 'Person' can be a record.");
-            await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
-        }
+        var expected = VerifyCS.Diagnostic("CRA0001")
+            .WithSpan(5, 18, 5, 24)
+            .WithMessage("Type name 'Person' can be a record.");
+        await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
     }
 }
