@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using VerifyCS = ClassToRecordAnalyzer.Analyzer.Test.CSharpCodeFixVerifier<
     ClassToRecordAnalyzer.Analyzer.ClassToRecordAnalyzer,
