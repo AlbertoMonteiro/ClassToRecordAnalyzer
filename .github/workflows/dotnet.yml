@@ -28,4 +28,4 @@ jobs:
     - name: Publish
       run: |
         cd nuget
-        dotnet nuget push *.nupkg -k ${{ secrets.NUGET_KEY }}
+        dotnet nuget push *.nupkg -k ${{ secrets.NUGET_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
