@@ -24,8 +24,6 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Pack
-      run: dotnet pack -c Release -o nuget
-      working-directory: ./ClassToRecordAnalyzer.Analyzer/ClassToRecordAnalyzer.Analyzer.Package
+      run: dotnet build ./ClassToRecordAnalyzer.Analyzer/ClassToRecordAnalyzer.Analyzer.Package/ClassToRecordAnalyzer.Analyzer.Package.csproj -c Release -o nuget
     - name: Publish
-      run: dotnet nuget push file *.nupkg -k ${{ secrets.NUGET_KEY }}
-      working-directory: ./ClassToRecordAnalyzer.Analyzer/ClassToRecordAnalyzer.Analyzer.Package/nuget
+      run: dotnet nuget push file ./nuget/*.nupkg -k ${{ secrets.NUGET_KEY }}
