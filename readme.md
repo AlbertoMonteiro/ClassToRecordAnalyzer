@@ -1,4 +1,5 @@
 # Class➡️Record Analyzer
+![Nuget](https://img.shields.io/nuget/v/ClassToRecord.Analyzer?style=flat-square)<br>
 Simple analyzer that helps to convert a simple class to a record, when you use Visual Studio`s feature to "Paste special as JSON" to create the class from the JSON in your clipboard it creates a class, when that analyzer will help to convert this class to a record.
 
 An class must meet following requirements to trigger analyzer:
