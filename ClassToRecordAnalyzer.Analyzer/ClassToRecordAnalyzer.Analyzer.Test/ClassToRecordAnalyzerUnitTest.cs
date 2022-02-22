@@ -29,7 +29,7 @@ namespace ConsoleApplication1
         public string Name { get; set; }
         private int Age { get; set; }
     }
-}";
+}".ReplaceLineEndings("\r\n");
 
         await VerifyCS.VerifyAnalyzerAsync(test);
     }
@@ -46,7 +46,7 @@ namespace ConsoleApplication1
         public string Name { get; set; }
         public void DoNothing() { }
     }
-}";
+}".ReplaceLineEndings("\r\n");
 
         await VerifyCS.VerifyAnalyzerAsync(test);
     }
@@ -62,14 +62,14 @@ namespace ConsoleApplication1
     {
         public string Name { get; set; }
     }
-}";
+}".ReplaceLineEndings("\r\n");
 
         var fixtest = @"using System;
 
 namespace ConsoleApplication1
 {
     public record Person(string Name);
-}".ReplaceLineEndings();
+}".ReplaceLineEndings("\r\n");
 
         var expected = VerifyCS.Diagnostic("CRA0001")
             .WithSpan(5, 18, 5, 24)
@@ -89,14 +89,14 @@ namespace ConsoleApplication1
         public string Name { get; set; }
         public int Age { get; set; }
     }
-}";
+}".ReplaceLineEndings("\r\n");
 
         var fixtest = @"using System;
 
 namespace ConsoleApplication1
 {
     public record Person(string Name, int Age);
-}".ReplaceLineEndings();
+}".ReplaceLineEndings("\r\n");
 
         var expected = VerifyCS.Diagnostic("CRA0001")
             .WithSpan(5, 18, 5, 24)
@@ -120,7 +120,7 @@ namespace ConsoleApplication1
         [JsonIgnore]
         public int Age { get; set; }
     }
-}";
+}".ReplaceLineEndings("\r\n");
 
         var fixtest = @"using System;
 using System.Text.Json.Serialization;
@@ -128,7 +128,7 @@ using System.Text.Json.Serialization;
 namespace ConsoleApplication1
 {
     public record Person([property: JsonPropertyName(""theName""), JsonIgnore] string Name, [property: JsonPropertyName(""theAge""), JsonIgnore] int Age);
-}".ReplaceLineEndings();
+}".ReplaceLineEndings("\r\n");
 
         var expected = VerifyCS.Diagnostic("CRA0001")
             .WithSpan(6, 18, 6, 24)
