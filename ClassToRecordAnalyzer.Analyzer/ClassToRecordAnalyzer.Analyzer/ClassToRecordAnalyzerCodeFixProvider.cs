@@ -48,7 +48,13 @@ namespace ClassToRecordAnalyzer.Analyzer
             {
                 if (tokens.Count >= 1)
                     tokens.Add(Token(SyntaxKind.CommaToken));
-                tokens.Add(Parameter(Identifier(property.Identifier.ValueText)).WithType(property.Type));
+                var parameter = Parameter(Identifier(property.Identifier.ValueText)).WithType(property.Type);
+                if (property.AttributeLists.Any())
+                {
+                    var newAttributeList = AttributeList(SeparatedList(property.AttributeLists.SelectMany(x => x.Attributes)));
+                    parameter = parameter.WithAttributeLists(SingletonList(newAttributeList.WithTarget(AttributeTargetSpecifier(Token(SyntaxKind.PropertyKeyword)))));
+                }
+                tokens.Add(parameter);
             }
 
             var record = RecordDeclaration(Token(SyntaxKind.RecordKeyword), classDeclaration.Identifier.ValueText)
